@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Coffee Compass 
+{% endblock %}
+
+{% block content %}
+<div id="results">
+    {% for b in businesses %}
+    <div class="card">
+        <div class="img-wrapper">
+            <img class="card-img-top" src="{{ b.image_url }}" alt="Card image cap">
+        </div>
+        <div class="card-body">
+            <h2 class="card-title">{{ b.name }}</h2>
+
+            {% for address in b.location.display_address %}
+            <p class="card-text" style="margin: 0;">{{ address }}</p>
+            {% endfor %}
+
+            <p class="card-text">{{ b.display_phone }}</p>
+            <a href="{{ b.url }}" class="btn btn-primary">{{ b.url }}</a>
+        </div>
+        <div class="card-footer text-muted">
+            <p>store interactions</p>
+          </div>
+      </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Coffee Compass 
+{% endblock %}
+
+{% block content %}
+<div class="container-title">
+    <span class="title">c o f f e e _ c o m p a s s</span>
+        <div class="container-form">
+            <form action="/search">
+                <input class="searchbox" type="text" name="search" placeholder="address, neighborhood, city, state or zip">
+            </form>
+        </div>    
+    <span class="discover">discover your daily grind</span>
+</div>
+
+
+{% endblock %}

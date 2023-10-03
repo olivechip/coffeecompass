@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/stylesheets/app.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap" rel="stylesheet">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <ul class="navbar">
+        <li class="left-link"><a href="/" class="button">Home</a></li>
+        {% if not g.user %}
+        <li class="left-link"><a href="/login" class="button">Login</a></li>
+        <li class="left-link"><a href="/signup" class="button">Sign Up</a></li>
+        {% else %}
+        <li class="left-link"><a href="/users/{{ g.user.id }}" class="button">Profile</a></li>
+        <li class="left-link"><a href="/logout" class="button">Logout</a></li>
+        {% endif %}
+    </ul>
+    <div class="container-flash">
+        {% for msg in get_flashed_messages() %}
+        {{ msg }}
+        {% endfor %}
+    </div>
+    
+
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
