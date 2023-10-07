@@ -1,6 +1,6 @@
 from flask import Flask, render_template, flash, redirect, request, jsonify, session, g
 from forms import UserAddForm, UserLoginForm
-from models import db, connect_db, User, Coffeeshop
+from models import db, connect_db, User, Coffeeshop, UserCoffeeshopStatus
 import requests
 
 CURR_USER_KEY = "curr_user"
@@ -57,7 +57,7 @@ def signup():
                     )
             db.session.commit()
             do_login(user)
-            return redirect('/login')
+            return redirect('/')
     else:
         return render_template('signup.html', form=form)
 
@@ -95,12 +95,39 @@ def search():
 
     if response.status_code == 200:
         data = response.json()
-        print(data)
         businesses = data.get('businesses', [])
+        print(businesses)
+        for b in businesses:
+            if not Coffeeshop.query.filter(Coffeeshop.yelp_id == b["id"]):
+                Coffeeshop.add_to_db(
+                name=b["name"], 
+                yelp_id=b["id"], 
+                address=b["location"]["display_address"]
+                )
+                db.session.commit()
         return render_template('results.html', businesses=businesses)
     else:
         print("Error:", response.status_code)
         return render_template('error_404.html')
 
     return render_template('index.html')
+
+@app.route('/users/<user_id>')
+def view_user(user_id):
+    user = User.query.get_or_404(user_id)
+    coffeeshops = UserCoffeeshopStatus.query.filter(User.id == UserCoffeeshopStatus.user_id).all()
+    print(coffeeshops)
+    return render_template('user.html', user=user, coffeeshops=coffeeshops)
+
+@app.route('/add_to_favorite/<yelp>', methods=['POST'])
+def add_to_fav(yelp):
+    if not g.user:
+        flash("You must have an account to do this.")
+        return redirect('/')
+        
+    coffeeshop = Coffeeshop.query.filter_by(yelp_id = yelp).first()
+
+    uc_status = UserCoffeeshopStatus(user_id=g.user.id, coffeeshop_id=coffeeshop.id, status='favorite')
+    db.session.add(uc_status)
+    db.session.commit()
 

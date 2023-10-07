@@ -4,6 +4,6 @@ from models import User
 db.drop_all()
 db.create_all()
 
-user = User.register('changarooboy@gmail.com', 'changarooboy', 'password')
+user = User.signup('changarooboy', 'password', "/static/images/default-pic.png")
 db.session.commit()
 

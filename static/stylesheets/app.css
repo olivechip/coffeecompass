@@ -91,8 +91,17 @@ img {
     flex-direction: column; /* Stack elements vertically within cards */
 }
 .card-title {
+    font-weight: bolder;
+    font-size: 24px;
     padding: 10px;
 }
+
+.rating {
+    font-weight: bolder;
+    padding: 10px;
+    margin-top: none;
+}
+
 .card-img-top {
     border-top-right-radius: 30px;
     border-top-left-radius: 30px;
@@ -101,9 +110,19 @@ img {
     object-fit: cover; /* Maintain aspect ratio and cover the container */
 }
 
+.contact-container p {
+    padding:none;
+    margin:none;
+}
+
 .card-text {
     font-weight: bold;
-    padding: 10px; /* Add padding to content for spacing */
+    padding: 0px 10px;
+    margin: none;
+}
+
+.logo {
+    max-width: 75px;
 }
 
 /* Define the button style */

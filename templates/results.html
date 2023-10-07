@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Coffee Compass 
+Coffee Compass - Results
 {% endblock %}
 
 {% block content %}
@@ -11,19 +11,30 @@ Coffee Compass
         <div class="img-wrapper">
             <img class="card-img-top" src="{{ b.image_url }}" alt="Card image cap">
         </div>
+
         <div class="card-body">
-            <h2 class="card-title">{{ b.name }}</h2>
+            <div class="title-container">
+                <p class="card-title">{{ b.name }}</p>
+                <p class="rating">
+                    <img src="/static/images/small/{{ b.rating }}.png" alt="{{ b.rating }}_yelp_stars">
+                    {{ b.review_count }} Reviews
+                </p>
+            </div>
 
-            {% for address in b.location.display_address %}
-            <p class="card-text" style="margin: 0;">{{ address }}</p>
-            {% endfor %}
-
-            <p class="card-text">{{ b.display_phone }}</p>
-            <a href="{{ b.url }}" class="btn btn-primary">{{ b.url }}</a>
+            <div class="contact-container">
+                {% for address in b.location.display_address %}
+                    <p class="card-text">{{ address }}</p>
+                {% endfor %}
+                <p class="card-text">{{ b.display_phone }}</p>
+                <p class="card-text"><a href="{{ b.url }}" class="btn btn-primary"><img class ="logo" src="/static/images/yelp/yelp_logo.png" alt="yelp_logo"></a></p>
+            </div>
         </div>
+
         <div class="card-footer text-muted">
-            <p>store interactions</p>
-          </div>
+            <form action="/add_to_favorite/{{ b.id }}" method="POST">
+                <button>Add to Favorites</button>
+            </form>
+        </div>
       </div>
     {% endfor %}
 </div>

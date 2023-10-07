@@ -16,6 +16,9 @@ class User(db.Model):
     password = db.Column(db.String, nullable=False)
     image_url = db.Column(db.String, default="/static/images/default-pic.png")
 
+    uc_statuses = db.relationship('UserCoffeeshopStatus', backref='user')
+    coffeeshops = db.relationship('Coffeeshop', secondary='uc_status', backref='user')
+
     @classmethod
     def validate_username(cls, username):
         if cls.query.filter_by(username=username).first():
@@ -46,5 +49,24 @@ class Coffeeshop(db.Model):
     __tablename__ = 'coffeeshops'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String, nullable=False, unique=True)
+    name = db.Column(db.String, nullable=False)
     address = db.Column(db.String, nullable=False, unique=True)
+    yelp_id = db.Column(db.String, nullable=False, unique=True)
+
+    @classmethod
+    def add_to_db(cls, name, address, yelp_id):
+        b = Coffeeshop(
+            name = name,
+            address = address,
+            yelp_id = yelp_id
+        )
+        db.session.add(b)
+        return b
+
+class UserCoffeeshopStatus(db.Model):
+    __tablename__ = "uc_status"
+
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True)
+    coffeeshop_id = db.Column(db.Integer, db.ForeignKey('coffeeshops.id'), primary_key=True)
+    status = db.Column(db.String)
+
