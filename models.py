@@ -66,7 +66,7 @@ class Coffeeshop(db.Model):
 class UserCoffeeshopStatus(db.Model):
     __tablename__ = "uc_status"
 
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True)
-    coffeeshop_id = db.Column(db.Integer, db.ForeignKey('coffeeshops.id'), primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete="cascade"), primary_key=True)
+    coffeeshop_id = db.Column(db.Integer, db.ForeignKey('coffeeshops.id', ondelete="cascade"), primary_key=True)
     status = db.Column(db.String)
 

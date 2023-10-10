@@ -98,7 +98,7 @@ def search():
         businesses = data.get('businesses', [])
         print(businesses)
         for b in businesses:
-            if not Coffeeshop.query.filter(Coffeeshop.yelp_id == b["id"]):
+            if not Coffeeshop.query.filter(Coffeeshop.yelp_id == b["id"]).first():
                 Coffeeshop.add_to_db(
                 name=b["name"], 
                 yelp_id=b["id"], 
