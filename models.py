@@ -52,7 +52,7 @@ class Coffeeshop(db.Model):
     display_phone = db.Column(db.String, nullable=True)
     rating = db.Column(db.Float, nullable=True)
     review_count = db.Column(db.Integer, default=0) 
-    img_url = db.Column(db.String, nullable=True)  # Add img_url column
+    img_url = db.Column(db.String, nullable=True)
 
     uc_statuses = db.relationship('UserCoffeeshopStatus', back_populates='coffeeshop')
 
@@ -69,7 +69,7 @@ class Coffeeshop(db.Model):
             shop.display_phone = display_phone
             shop.rating = rating
             shop.review_count = review_count
-            shop.img_url = img_url  # Update img_url
+            shop.img_url = img_url
         else:
             shop = cls(
                 yelp_id=yelp_id, 
@@ -78,7 +78,7 @@ class Coffeeshop(db.Model):
                 display_phone=display_phone, 
                 rating=rating,
                 review_count=review_count,
-                img_url=img_url  # Include img_url for new shops
+                img_url=img_url
             )
             db.session.add(shop)
         db.session.commit()
