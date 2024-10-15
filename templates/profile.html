@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Coffee Compass - {{ user.username }}'s Profile
+{% endblock %}
+
+{% block content %}
+<div class="header">
+    <h1>{{ user.username }}'s Favorite Coffeeshops</h1>
+</div>
+
+{% if coffeeshops %}
+<div class="results">
+    {% for coffeeshop in coffeeshops %}
+    <div class="card">
+        <div class="img-wrapper">
+            <img class="card-img-top" src="{{ coffeeshop.img_url }}" alt="Coffee Shop Image">
+        </div>
+
+        <div class="card-body">
+            <div class="title-container">
+                <p class="card-title">{{ coffeeshop.name }}</p>
+                <p class="rating">
+                    <img class="rating-img" src="/static/images/small/{{ (coffeeshop.rating * 2) | round / 2 }}.png"
+                        alt="{{ coffeeshop.rating }}_yelp_stars"><br />
+                    {{ coffeeshop.review_count }} Reviews
+                </p>
+            </div>
+
+            <div class="contact-container">
+                <p class="card-text">{{ coffeeshop.display_address }}</p>
+                <p class="card-text">{{ coffeeshop.display_phone }}</p>
+                <p class="card-text">
+                    <a href="{{ coffeeshop.url }}" class="btn btn-primary">
+                        <img class="yelp-logo" src="/static/images/yelp/yelp_logo.png" alt="yelp_logo">
+                    </a>
+                </p>
+            </div>
+        </div>
+
+        {% if g.user and g.user.id == user.id %}
+        <div class="card-footer text-muted">
+            <form action="/remove_from_favorite/{{ coffeeshop.yelp_id }}" method="POST">
+                <button class="button">Unfavorite</button>
+            </form>
+        </div>
+        {% endif %}
+
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="no-favs">
+    <p>No favorite coffeeshops found.</p>
+</div>
+{% endif %}
+{% endblock %}

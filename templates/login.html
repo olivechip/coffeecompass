@@ -1,21 +1,38 @@
 {% extends 'base.html' %}
 
+{% block title %}Login{% endblock %}
+
 {% block content %}
-    <h2>Login</h2>
-    <form method="POST">
-      {{ form.hidden_tag() }}
+<div class="login-container">
+  <h1>Login</h1>
 
-      {% for field in form if field.widget.input_type != 'hidden' %}
+  <form method="POST" action="/login">
+    {{ form.hidden_tag() }}
 
-        {% for error in field.errors %}
-            {{ error }}
-        {% endfor %}
-
-        {{ field(placeholder=field.label.text) }}
-
+    <div class="form-group">
+      <label for="username">Username:</label>
+      {{ form.username(class="form-control", placeholder="username") }}
+      {% for error in form.username.errors %}
+      <span class="error">{{ error }}</span>
       {% endfor %}
-    </form>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password:</label>
+      {{ form.password(class="form-control", placeholder="password") }}
+      {% for error in form.password.errors %}
+      <span class="error">{{ error }}</span>
+      {% endfor %}
+    </div>
+
+    <button type="submit" class="button">{{ form.submit.label }}</button>
+  </form>
+
+  <div class="signup-redirect">
+    <p>Don't have an account? <a href="/signup">Sign up here!</a></p>
+    
+    <!-- Blurb for Render -->
+    <p>If using on Render, server needs time to boot up on Sign Up or Login. Thanks for waiting! </p>
   </div>
 </div>
-
 {% endblock %}

@@ -7,7 +7,6 @@ class UserAddForm(FlaskForm):
 
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[Length(min=6)])
-    image_url = StringField('(Optional) Image URL')
     submit = SubmitField('Sign Up')
 
 class UserLoginForm(FlaskForm):

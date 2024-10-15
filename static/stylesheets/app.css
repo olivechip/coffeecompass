@@ -13,7 +13,7 @@ ul.navbar {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    background-color: transparent; /* Background color for the navbar */
+    background-color: transparent;
     overflow: hidden;
 }
 
@@ -24,22 +24,84 @@ ul.navbar li {
 
 ul.navbar li a {
     display: block;
-    color: black; /* Text color for links */
+    color: black;
     font-weight: bold;
     text-align: center;
-    padding: 14px 16px; /* Spacing for links */
+    padding: 14px 16px; 
     text-decoration: none;
 }
 
 ul.navbar li.left-link {
-    float: left; /* Align to the left */
+    float: left;
 }
 
 ul.navbar li:not(.left-link) {
-    float: left; /* Align to the right */
+    float: left;
 }
 
-/* Title */
+.container-flash {
+    text-align: center;
+    margin: 10px 0;
+}
+
+.flash-message {
+    color: red;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* Signup/Login Page */
+.signup-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-container {
+    max-width: 20rem;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+    font-weight: bolder;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    box-sizing: border-box;
+}
+
+.signup-redirect {
+    text-align: center;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.login-redirect {
+    text-align: center;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+/* Home */
 .container-title {
     font-size: 56px;
     font-weight: bold;
@@ -53,7 +115,7 @@ ul.navbar li:not(.left-link) {
 
 .searchbox {
     width: 100%;
-    background-color: transparent;
+    background-color: rgba(255, 255, 255, 0.4);
     border: 1px solid black;
     border-radius: 30px;
     padding: 10px 20px 10px;
@@ -64,83 +126,106 @@ ul.navbar li:not(.left-link) {
     font-weight: bold;
 }
 
-#results {
+/* Search Results */
+.header {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.results {
     display: flex;
-    flex-wrap: wrap; /* Wrap cards to the next row if needed */
-    justify-content: space-between; /* Distribute cards evenly */
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 30px;
+    margin: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    flex-direction: column;
 }
 
 .img-wrapper {
     max-width: 100%;
-    height: 18em;
+    height: 200px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-img {
+.img-wrapper img {
     max-width: 100%;
-    max-height: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
 }
 
-.card {
-    width: 20%; /* Set a fixed width for each card */
-    min-width: 200px;
-    max-width: 300px; /* Maximum width for responsiveness */
-    border-radius: 30px;
-    margin: 10px; /* Add some spacing between cards */
-    background-color: white;
-    display: flex; /* Enable flex layout for consistent height */
-    flex-direction: column; /* Stack elements vertically within cards */
-}
 .card-title {
     font-weight: bolder;
-    font-size: 24px;
-    padding: 10px;
+    font-size: 18px;
+    margin-left: 1rem;
+}
+
+.rating-img {
+    max-width: 40%;
 }
 
 .rating {
     font-weight: bolder;
-    padding: 10px;
-    margin-top: none;
+    margin-left: 1rem;
 }
 
 .card-img-top {
     border-top-right-radius: 30px;
     border-top-left-radius: 30px;
     width: 100%;
-    height: 100%; /* Occupy the full card height */
-    object-fit: cover; /* Maintain aspect ratio and cover the container */
+    height: auto;
+    object-fit: cover;
 }
 
 .contact-container p {
-    padding:none;
-    margin:none;
+    margin-left: 1rem;
+    padding: 0;
 }
 
 .card-text {
     font-weight: bold;
     padding: 0px 10px;
-    margin: none;
+    margin: 0;
 }
 
-.logo {
-    max-width: 75px;
+.yelp-logo {
+    max-width: 3rem;
+    margin-top: 0.5rem;
 }
 
-/* Define the button style */
+/* Profile */
+.no-favs {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1.2em;
+    font-weight: bolder;
+}
+
+/* Buttons */
 .button {
     margin: 1rem;
     display: inline-block;
     padding: 10px 20px;
-    border: 1px solid black; /* Black border */
-    border-radius: 30px; /* Rounded corners */
-    color: black; /* Text color */
+    border: 1px solid black;
+    border-radius: 30px;
     text-align: center;
     text-decoration: none;
     font-size: 12px;
     cursor: pointer;
 }
 
-/* Hover effect */
 .button:hover {
-    background-color: chocolate; /* Change the background on hover */
-    color: white; /* Change text color on hover */
+    background-color: chocolate;
+    color: white;
 }

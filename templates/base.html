@@ -16,13 +16,13 @@
         <li class="left-link"><a href="/login" class="button">Login</a></li>
         <li class="left-link"><a href="/signup" class="button">Sign Up</a></li>
         {% else %}
-        <li class="left-link"><a href="/users/{{ g.user.id }}" class="button">Profile</a></li>
+        <li class="left-link"><a href="/users/{{ g.user.username }}" class="button">Profile</a></li>
         <li class="left-link"><a href="/logout" class="button">Logout</a></li>
         {% endif %}
     </ul>
     <div class="container-flash">
         {% for msg in get_flashed_messages() %}
-        {{ msg }}
+        <div class="flash-message">{{ msg }}</div>
         {% endfor %}
     </div>
     

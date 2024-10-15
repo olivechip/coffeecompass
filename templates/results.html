@@ -5,7 +5,11 @@ Coffee Compass - Results
 {% endblock %}
 
 {% block content %}
-<div id="results">
+<div class="header">
+    <h1>Results for '<span>{{ location }}</span>'</h1>
+</div>
+
+<div class="results">
     {% for b in businesses %}
     <div class="card">
         <div class="img-wrapper">
@@ -16,26 +20,31 @@ Coffee Compass - Results
             <div class="title-container">
                 <p class="card-title">{{ b.name }}</p>
                 <p class="rating">
-                    <img src="/static/images/small/{{ b.rating }}.png" alt="{{ b.rating }}_yelp_stars">
+                    <img class="rating-img" src="/static/images/small/{{ (b.rating * 2) | round / 2 }}.png"
+                        alt="{{ b.rating }}_yelp_stars"><br />
                     {{ b.review_count }} Reviews
                 </p>
             </div>
 
             <div class="contact-container">
                 {% for address in b.location.display_address %}
-                    <p class="card-text">{{ address }}</p>
+                <p class="card-text">{{ address }}</p>
                 {% endfor %}
                 <p class="card-text">{{ b.display_phone }}</p>
-                <p class="card-text"><a href="{{ b.url }}" class="btn btn-primary"><img class ="logo" src="/static/images/yelp/yelp_logo.png" alt="yelp_logo"></a></p>
+                <p class="card-text">
+                    <a href="{{ b.url }}" class="btn btn-primary">
+                        <img class="yelp-logo" src="/static/images/yelp/yelp_logo.png" alt="yelp_logo">
+                    </a>
+                </p>
             </div>
         </div>
 
         <div class="card-footer text-muted">
             <form action="/add_to_favorite/{{ b.id }}" method="POST">
-                <button>Add to Favorites</button>
+                <button class="button">Add to Favorites</button>
             </form>
         </div>
-      </div>
+    </div>
     {% endfor %}
 </div>
 {% endblock %}
